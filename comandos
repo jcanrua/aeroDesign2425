@@ -9,3 +9,11 @@ python3 -m venv venv //SOLO UNA VEZ (crea un virtual enviorment)
 source venv/bin/activate //ESTO ES IGUAL A PONER activar_virtual
 
 pip install opencv-python
+
+sudo apt-get install cmake
+
+pip install imutils
+
+pip install wheel
+
+pip install apriltag
