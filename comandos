@@ -1,0 +1,11 @@
+sudo apt update
+
+sudo apt full-update
+
+//estos dos comandos conviene ponerlos regularmente para mantener el sistema actualizado
+
+python3 -m venv venv //SOLO UNA VEZ (crea un virtual enviorment)
+
+source venv/bin/activate //ESTO ES IGUAL A PONER activar_virtual
+
+pip install opencv-python && pip install imutils && pip install apriltag && pip install dt-apriltags && pip install transforms3d && pip install moms-apriltag
