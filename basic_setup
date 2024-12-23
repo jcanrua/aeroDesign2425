@@ -2,15 +2,17 @@ sudo apt update        #\
                          #- estos dos comandos conviene ponerlos regularmente para mantener el sistema actualizado
 sudo apt full-upgrade  #/ 
 
+sudo apt-get install libcamera-apps
 
+sudo apt install python3-picamzero
+
+sudo apt-get install cmake
 
 python3 -m venv venv  #-  SOLO UNA VEZ (crea un virtual enviorment)
 
 source venv/bin/activate  
 
 pip install opencv-python
-
-sudo apt-get install cmake
 
 pip install imutils
 
@@ -23,7 +25,3 @@ pip install dt-apriltags
 pip install transforms3d
 
 pip install moms-apriltag
-
-sudo apt-get install libcamera-apps
-
-sudo apt install python3-picamzero
