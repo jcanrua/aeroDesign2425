@@ -1,12 +1,12 @@
-sudo apt update        \
-                         - estos dos comandos conviene ponerlos regularmente para mantener el sistema actualizado
-sudo apt full-upgrade  / 
+sudo apt update        #\
+                         #- estos dos comandos conviene ponerlos regularmente para mantener el sistema actualizado
+sudo apt full-upgrade  #/ 
 
 
 
-python3 -m venv venv  -  SOLO UNA VEZ (crea un virtual enviorment)
+python3 -m venv venv  #-  SOLO UNA VEZ (crea un virtual enviorment)
 
-source venv/bin/activate 
+source venv/bin/activate  
 
 pip install opencv-python
 
