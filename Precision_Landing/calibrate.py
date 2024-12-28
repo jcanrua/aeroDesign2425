@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import numpy as np
 import cv2
+from picamera2 import Picamera2
 import os
 import argparse
 import yaml
@@ -22,7 +23,7 @@ if __name__ == '__main__':
 # parser.add_argument('--figure', help='saved visualization name', default=None)
     args = parser.parse_args()
 
-    source = cv2.VideoCapture(0)
+    
     # square_size = float(args.get('--square_size', 1.0))
     
     pattern_size = (9, 6)
@@ -32,33 +33,22 @@ if __name__ == '__main__':
 
     obj_points = []
     img_points = []
+
+    picam2 = Picamera2()
     h, w = args.height, args.width
-    source.set(cv2.CAP_PROP_FRAME_HEIGHT,h)
-    source.set(cv2.CAP_PROP_FRAME_WIDTH,w)
+    picam2.preview_configuration.main.size=(w,h)
+    picam2.start()
     
-    i = -1
     image_count=0
     image_goal=30
     while True:
-        i += 1
-        if isinstance(source, list):
-            # glob
-            if i == len(source):
-                break
-            img = cv2.imread(source[i])
-        else:
-            # cv2.VideoCapture
-            retval, img = source.read()
-            if not retval:
-                break
-            if i % args.framestep != 0:
-                continue
+        img = picam2.capture_array()
         cv2.imshow('Image',img)
 
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
-        print('Searching for chessboard in frame ' + str(i) + '...'),
+        print('Searching for chessboard in frame ...'),
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         h, w = img.shape[:2]
         found, corners = cv2.findChessboardCorners(img, pattern_size, flags=cv2.CALIB_CB_FILTER_QUADS)
@@ -71,7 +61,7 @@ if __name__ == '__main__':
         if args.debug_dir:
             img_chess = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
             cv2.drawChessboardCorners(img_chess, pattern_size, corners, found)
-            cv2.imwrite(os.path.join(args.debug_dir, '%04d.png' % i), img_chess)
+            cv2.imwrite(os.path.join(args.debug_dir, '%04d.png'), img_chess)
         if not found:
             print('not found')
             continue
