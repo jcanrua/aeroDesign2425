@@ -1,0 +1,1 @@
+Para generar aruco markers ir a: https://chev.me/arucogen/
