@@ -10,7 +10,7 @@ sudo apt-get install cmake
 
 sudo apt-get install vim 
 
-python3 -m venv venv  #-  SOLO UNA VEZ (crea un virtual enviorment)
+python3 -m venv --system-site-packages venv  #-  SOLO UNA VEZ (crea un virtual enviorment)
 
 source venv/bin/activate  
 
