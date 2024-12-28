@@ -14,16 +14,18 @@ python3 -m venv venv  #-  SOLO UNA VEZ (crea un virtual enviorment)
 
 source venv/bin/activate  
 
-pip install opencv-python
+pip3 install opencv-python
 
-pip install imutils
+pip3 install imutils #Editar archivo webcamvideostream.py de la libreria y añadir variables width y height al __init__
 
-pip install wheel
+pip3 install pyyaml
 
-pip install apriltag
+pip3 install wheel
 
-pip install dt-apriltags
+pip3 install apriltag
 
-pip install transforms3d
+pip3 install dt-apriltags
 
-pip install moms-apriltag
+pip3 install transforms3d
+
+pip3 install moms-apriltag
