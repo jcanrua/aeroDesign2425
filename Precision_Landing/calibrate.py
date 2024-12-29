@@ -37,6 +37,7 @@ if __name__ == '__main__':
     picam2 = Picamera2()
     h, w = args.height, args.width
     picam2.preview_configuration.main.size=(w,h)
+    picam2.preview_configuration.main.format = "RGB888" #8 bits
     picam2.start()
     
     image_count=0
