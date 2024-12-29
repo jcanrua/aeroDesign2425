@@ -15,7 +15,6 @@ picam2 = Picamera2()
 picam2.preview_configuration.main.size=(width,height)
 picam2.preview_configuration.main.format = "RGB888" #8 bits
 picam2.start()
-cap
 viewVideo=True
 if len(sys.argv)>1:
     viewVideo=sys.argv[1]
