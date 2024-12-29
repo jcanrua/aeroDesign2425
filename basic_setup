@@ -16,7 +16,7 @@ source venv/bin/activate
 
 pip3 install opencv-python
 
-pip3 install imutils #Editar archivo webcamvideostream.py de la libreria y añadir variables width y height al __init__
+pip3 install imutils
 
 pip3 install pyyaml
 
