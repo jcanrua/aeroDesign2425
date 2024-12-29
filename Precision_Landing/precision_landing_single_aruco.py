@@ -9,10 +9,9 @@ from pymavlink import mavutil
 
 import cv2
 import cv2.aruco as aruco
+from picamera2 import Picamera2
 import numpy as np
 
-from imutils.video import WebcamVideoStream
-import imutils
 #######VARIABLES####################
 ##Aruco
 id_to_find = 72
@@ -28,7 +27,10 @@ detector = aruco.ArucoDetector(aruco_dict, parameters)
 ##Camera
 horizontal_res = 640
 vertical_res = 480
-cap = WebcamVideoStream(src=0, width=horizontal_res, height=vertical_res).start()
+picam2 = Picamera2()
+picam2.preview_configuration.main.size=(horizontal_res,vertical_res)
+picam2.preview_configuration.main.format = "RGB888" #8 bits
+picam2.start()
 
 horizontal_fov = 62.2 * (math.pi / 180 ) ##Pi cam V1: 53.5 V2: 62.2
 vertical_fov = 48.8 * (math.pi / 180)    ##Pi cam V1: 41.41 V2: 48.8
@@ -133,10 +135,10 @@ def lander():
         first_run=1
         start_time=time.time()
         
-    frame = cap.read()
+    frame = picam2.capture_array()
     frame = cv2.resize(frame,(horizontal_res,vertical_res))
-    frame_np = np.array(frame)
-    gray_img = cv2.cvtColor(frame_np,cv2.COLOR_BGR2GRAY)
+    #frame_np = np.array(frame)
+    gray_img = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     ids=''
     corners, ids, rejected = detector.detectMarkers(image=gray_img)
     if vehicle.mode!='LAND':
