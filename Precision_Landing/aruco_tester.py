@@ -21,8 +21,6 @@ if len(sys.argv)>1:
     if viewVideo=='0' or viewVideo=='False' or viewVideo=='false':
         viewVideo=False
 ############ARUCO/CV2############
-id_to_find=72
-marker_size=20 #cm
 
 realWorldEfficiency=.7 ##Iterations/second are slower when the drone is flying. This accounts for that
 aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
@@ -59,26 +57,18 @@ while time.time()-start_time<seconds:
     if ids is not None:
         print("Found these IDs in the frame:")
         print(ids)
-    if ids is not None and ids[0] == id_to_find:
-        #ret = aruco.estimatePoseSingleMarkers(corners,marker_size,cameraMatrix=cameraMatrix,distCoeffs=cameraDistortion)
-        #rvec,tvec = ret[0][0,0,:], ret[1][0,0,:]
-        #x="{:.2f}".format(tvec[0])
-        #y="{:.2f}".format(tvec[1])
-        #z="{:.2f}".format(tvec[2])
-        ##print("FOUND ARUCO!")
-        #marker_position="MARKER POSITION: x="+x+" y="+y+" z="+z
-        #print(marker_position)
-        print("")
+    if ids is not None:
         if viewVideo==True:
-            aruco.drawDetectedMarkers(frame,corners)
-            #aruco.drawAxis(frame_np,cameraMatrix,cameraDistortion,rvec,tvec,10)
-            cv2.imshow('frame',frame)
+            print(corners)
+            for id in range(len(ids)):
+                aruco.drawDetectedMarkers(frame,corners)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     else:
-        print("ARUCO "+str(id_to_find)+"NOT FOUND IN FRAME.")
+        print("NO IDS FOUND.")
         print("")
     counter=float(counter+1)
+    cv2.imshow("frame", frame)
 
 if viewVideo==False:
     frequency=realWorldEfficiency*(counter/seconds)
