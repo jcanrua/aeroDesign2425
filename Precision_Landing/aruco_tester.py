@@ -59,9 +59,7 @@ while time.time()-start_time<seconds:
         print(ids)
     if ids is not None:
         if viewVideo==True:
-            print(corners)
-            for id in range(len(ids)):
-                aruco.drawDetectedMarkers(frame,corners)
+            aruco.drawDetectedMarkers(frame, corners)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     else:
