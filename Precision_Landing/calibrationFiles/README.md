@@ -1,1 +1,0 @@
-Directorio para los ficheros de calibracion de la camara
