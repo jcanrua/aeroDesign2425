@@ -149,9 +149,9 @@ vehicle.wait_heartbeat()
 log_and_print("Connected to vehicle")
 
 while True:
-    move_servos(800, 1220) #Open
+    move_servos(800, 2200) #Open
     time.sleep(4)
-    move_servos(1650, 2200) #Closed
+    move_servos(1650, 1220) #Closed
     time.sleep(4)
 
 while True:
