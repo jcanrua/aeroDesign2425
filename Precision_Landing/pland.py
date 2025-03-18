@@ -148,11 +148,6 @@ vehicle.wait_heartbeat()
 
 log_and_print("Connected to vehicle")
 
-#vehicle.parameters['PLND_ENABLED'] = 1
-#vehicle.parameters['PLND_TYPE'] = 1 ##1 for companion computer
-#vehicle.parameters['PLND_EST_TYPE'] = 0 ##0 for raw sensor, 1 for kalman filter pos estimation
-#vehicle.parameters['LAND_SPEED'] = 20 ##Descent speed of 30cm/s
-
 #STUFF HERE
 #---------------
 
