@@ -13,7 +13,7 @@ aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
 parameters = aruco.DetectorParameters()
 detector = aruco.ArucoDetector(aruco_dict, parameters)
 
-viewVideo = True
+viewVideo = False
 
 
 horizontal_res = 640
@@ -148,10 +148,11 @@ vehicle.wait_heartbeat()
 
 log_and_print("Connected to vehicle")
 
-#STUFF HERE
-#---------------
-
-#---------------
+while True:
+    msg = vehicle.recv_match(type = 'HEARTBEAT', blocking = False)
+    if msg:
+        mode = mavutil.mode_string_v10(msg)
+        print(mode)
 
 
 #Esperar a que el avion este en modo VTOL_LANDING
