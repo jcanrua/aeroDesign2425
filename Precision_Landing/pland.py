@@ -13,9 +13,6 @@ aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
 parameters = aruco.DetectorParameters()
 detector = aruco.ArucoDetector(aruco_dict, parameters)
 
-viewVideo = False
-
-
 horizontal_res = 640
 vertical_res = 480
 picam2 = Picamera2()
@@ -115,11 +112,7 @@ def lander():
         if ids is not None:
 
             x_avg, y_avg = send_land_message(0, corners)
-            
-            if viewVideo==True:
-                aruco.drawDetectedMarkers(frame, corners)
-                cv2.circle(frame,(int(x_avg), int(y_avg)), 10, (255, 0, 0), -1)                  
-
+                              
             log_and_print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
             log_and_print("FOUND COUNT: "+str(found_count)+" NOTFOUND COUNT: "+str(notfound_count))
             found_count=found_count+1
@@ -128,9 +121,6 @@ def lander():
     except Exception as e:
         log_and_print('Target likely not found. Error: '+str(e))
         notfound_count=notfound_count+1
-
-    if viewVideo==True:
-        cv2.imshow("frame", frame)
 
 ######################################################
 
