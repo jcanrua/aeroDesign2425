@@ -139,6 +139,12 @@ vehicle.wait_heartbeat()
 log_and_print("Connected to vehicle")
 
 while True:
+    move_servos(800, 1220) #Open
+    time.sleep(4)
+    move_servos(1650, 2200) #Closed
+    time.sleep(4)
+
+while True:
     msg = vehicle.recv_match(type = 'HEARTBEAT', blocking = False)
     if msg:
         mode = mavutil.mode_string_v10(msg)
