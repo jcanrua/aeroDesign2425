@@ -37,7 +37,7 @@ end_time=0
 def setup_logger():
     # Get current time and format it for use in filename
     current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_filename = f"log_vuelo_{current_time}.txt"
+    log_filename = f"logs/log_vuelo_{current_time}.txt"
     
     logging.basicConfig(
         filename=log_filename,
