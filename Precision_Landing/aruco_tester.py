@@ -60,6 +60,12 @@ while time.time()-start_time<seconds:
     if ids is not None:
         if viewVideo==True:
             aruco.drawDetectedMarkers(frame, corners)
+            x_sum = corners[0][0][0][0]+ corners[0][0][1][0]+ corners[0][0][2][0]+ corners[0][0][3][0]
+            y_sum = corners[0][0][0][1]+ corners[0][0][1][1]+ corners[0][0][2][1]+ corners[0][0][3][1]
+    
+            x_avg = x_sum* 0.25
+            y_avg = y_sum* 0.25
+            cv2.circle(frame,(x_avg, y_avg), 10, (255, 0, 0), -1)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     else:
