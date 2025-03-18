@@ -118,7 +118,7 @@ def lander():
             
             if viewVideo==True:
                 aruco.drawDetectedMarkers(frame, corners)
-                cv2.circle(frame,(x_avg, y_avg), 10, (255, 0, 0), -1)                  
+                cv2.circle(frame,(int(x_avg), int(y_avg)), 10, (255, 0, 0), -1)                  
 
             log_and_print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
             log_and_print("FOUND COUNT: "+str(found_count)+" NOTFOUND COUNT: "+str(notfound_count))
