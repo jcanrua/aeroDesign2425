@@ -150,8 +150,8 @@ def close_servos():
     vehicle.send_mavlink(msg2)
 
 def aruco_position(pos_id, corners):
-    x_sum = corners[pos_id][pos_id][0][0] + corners[pos_id][pos_id][1][0] + corners[pos_id][pos_id][2][0] + corners[pos_id][pos_id][3][0]
-    y_sum = corners[pos_id][pos_id][0][1] + corners[pos_id][pos_id][1][1] + corners[pos_id][pos_id][2][1] + corners[pos_id][pos_id][3][1]
+    x_sum = corners[pos_id][0][0][0] + corners[pos_id][0][1][0] + corners[pos_id][0][2][0] + corners[pos_id][0][3][0]
+    y_sum = corners[pos_id][0][0][1] + corners[pos_id][0][1][1] + corners[pos_id][0][2][1] + corners[pos_id][0][3][1]
 
     x_avg = x_sum * .25
     y_avg = y_sum * .25
@@ -171,12 +171,13 @@ def aruco_position(pos_id, corners):
 
 
 
+
 def lander(carga):
     frame = picam2.capture_array()
     frame = cv2.resize(frame, (horizontal_res, vertical_res))
     gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     ids = ''
-    corners, ids = detector.detectMarkers(image=gray_img)
+    corners, ids, rejected = detector.detectMarkers(image=gray_img)
     if ids is not None:
         if vehicle.mode != 'LAND':
             vehicle.mode = dronekit.VehicleMode("LAND")
@@ -185,12 +186,12 @@ def lander(carga):
                 time.sleep(1)
         try:
             if carga:
-                for pos_id in len(ids):
+                for pos_id in range(len(ids)):
                     if ids[pos_id] is id_to_find_carga:
                         log_and_print(f"Ha encontrado el id {pos_id}")
                         aruco_position(pos_id, corners)
             else:
-                for pos_id in len(ids):
+                for pos_id in range(len(ids)):
                     if ids[pos_id] is id_to_find_sin_carga:
                         log_and_print(f"Ha encontrado el id {pos_id}")
                         aruco_position(pos_id, corners)
