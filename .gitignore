@@ -1,3 +1,4 @@
 __pycache__/
 Precision_Landing/calibrationFiles/cameraDistortion.txt
 Precision_Landing/calibrationFiles/cameraMatrix.txt
+Precision_Landing/logs/*.txt
