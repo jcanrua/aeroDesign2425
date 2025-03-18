@@ -27,9 +27,6 @@ aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_ARUCO_ORIGINAL)
 parameters = aruco.DetectorParameters()
 detector = aruco.ArucoDetector(aruco_dict, parameters)
 
-calib_path="calibrationFiles/"
-cameraMatrix   = np.loadtxt(calib_path+'cameraMatrix.txt', delimiter=',')
-cameraDistortion   = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 #############################
 
 seconds=0
