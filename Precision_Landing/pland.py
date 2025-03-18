@@ -1,9 +1,10 @@
+from pymavlink import mavutil
 import cv2
 import cv2.aruco as aruco
 from picamera2 import Picamera2
 import numpy as np
 import time
-from pymavlink import mavutil
+
 from datetime import datetime
 import os
 import logging
@@ -53,13 +54,32 @@ def log_and_print(message, is_error=False):
         print(message)
         logging.info(message)
 
+def move_servos(pwm11, pwm12):
+    vehicle.mav.command_long_send(
+        vehicle.target_system,
+        vehicle.target_component,
+        mavutil.mavlink.MAV_CMD_DO_SET_SERVO,
+        0,
+        11,
+        pwm11
+    )
+
+    vehicle.message_factory.command_long_encode(
+        vehicle.target_system,
+        vehicle.target_component,
+        mavutil.mavlink.MAV_CMD_DO_SET_SERVO,
+        0,
+        12,
+        pwm12
+    )
+
 
 def send_land_message(marker_id,corners):
     x_sum = corners[marker_id][0][0][0]+ corners[marker_id][0][1][0]+ corners[marker_id][0][2][0]+ corners[marker_id][0][3][0]
     y_sum = corners[marker_id][0][0][1]+ corners[marker_id][0][1][1]+ corners[marker_id][0][2][1]+ corners[marker_id][0][3][1]
     
-    x_avg = x_sum*.25
-    y_avg = y_sum*.25
+    x_avg = x_sum* 0.25
+    y_avg = y_sum* 0.25
             
     x_ang = (x_avg - horizontal_res*.5)*(horizontal_fov/horizontal_res)
     y_ang = (y_avg - vertical_res*.5)*(vertical_fov/vertical_res)
