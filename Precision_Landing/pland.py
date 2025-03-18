@@ -66,7 +66,7 @@ def move_servos(pwm11, pwm12):
         0
     )
 
-    vehicle.message_factory.command_long_encode(
+    vehicle.mav.command_long_send(
         vehicle.target_system,
         vehicle.target_component,
         mavutil.mavlink.MAV_CMD_DO_SET_SERVO,
