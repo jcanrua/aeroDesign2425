@@ -33,17 +33,17 @@ cameraMatrix = np.loadtxt(calib_path + 'cameraMatrix.txt', delimiter=',')
 cameraDistortion = np.loadtxt(calib_path + 'cameraDistortion.txt', delimiter=',')
 
 def send_land_message(x, y):
-    msg = vehicle.message_factory.landing_target_encode(
+    msg = vehicle.mav.landing_target_send(
         0,
         0,
-        pymavlink.mavutil.mavlink.MAV_CMD_DO_SET_SERVO,
+        0,
         x,
         y,
         0,
         0,
         0,)
-    vehicle.send_mavlink(msg)
-    vehicle.flush()
+
+    print("mensaje enviado")
 
 def aruco_position(pos_id, corners):
     x_sum = corners[pos_id][0][0][0] + corners[pos_id][0][1][0] + corners[pos_id][0][2][0] + corners[pos_id][0][3][0]
@@ -65,6 +65,7 @@ def lander():
     ids = ''
     corners, ids, rejected = detector.detectMarkers(image=gray_img)
     if ids is not None:
+        print(ids)
         aruco_position(0, corners)
         cv2.imshow("frame", frame)
 
