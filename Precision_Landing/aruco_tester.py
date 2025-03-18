@@ -65,7 +65,7 @@ while time.time()-start_time<seconds:
     
             x_avg = x_sum* 0.25
             y_avg = y_sum* 0.25
-            cv2.circle(frame,(x_avg, y_avg), 10, (255, 0, 0), -1)
+            cv2.circle(frame,(int(x_avg), int(y_avg)), 10, (255, 0, 0), -1)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     else:
