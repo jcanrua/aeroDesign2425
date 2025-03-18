@@ -152,6 +152,8 @@ while True:
     msg = vehicle.recv_match(type = 'HEARTBEAT', blocking = False)
     if msg:
         mode = mavutil.mode_string_v10(msg)
+        if mode == "QLAND":
+            break
         print(mode)
 
 
