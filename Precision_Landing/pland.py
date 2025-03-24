@@ -118,10 +118,16 @@ def lander():
 
     corners, ids, rejected = detector.detectMarkers(image=gray_img)
  
+
+    altitude = vehicle.messages["AHRS2"].alt
+    print(altitude)
+
     try:
         if ids is not None:
-
-            x_avg, y_avg = send_land_message(0, corners)
+            if altitude > 7:
+                x_avg, y_avg = send_land_message(np.where(ids[0] == 50), corners)
+            else:
+                x_avg, y_avg = send_land_message(np.where(ids[0] == 70), corners)
                               
             log_and_print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
             log_and_print("FOUND COUNT: "+str(found_count)+" NOTFOUND COUNT: "+str(notfound_count))
@@ -143,6 +149,7 @@ setup_logger()
 log_and_print("Connecting to vehicle...")
 
 vehicle = mavutil.mavlink_connection("/dev/serial0", baud = 115200)
+
 
 vehicle.wait_heartbeat()
 
@@ -172,12 +179,5 @@ while True:
 log_and_print("Starting landing...")
 while True:
     lander()
-
-    msg = vehicle.recv_match(type = 'HEARTBEAT', blocking = False)
-    if msg:
-        mode = mavutil.mode_string_v10(msg)
-        if mode != "QLAND":
-            break
-        print(mode)
 
 log_and_print("Script finished")
