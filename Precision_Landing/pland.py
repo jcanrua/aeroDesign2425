@@ -119,7 +119,7 @@ def lander():
     corners, ids, rejected = detector.detectMarkers(image=gray_img)
  
 
-    altitude = vehicle.messages["AHRS2"].alt
+    altitude = vehicle.messages["AHRS2"].altitude
     print(altitude)
 
     try:
