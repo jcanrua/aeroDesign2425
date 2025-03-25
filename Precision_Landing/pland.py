@@ -119,16 +119,16 @@ def lander():
     corners, ids, rejected = detector.detectMarkers(image=gray_img)
  
 
-    altitude = vehicle.messages["AHRS2"].altitude
-    print(altitude)
+    #altitude = vehicle.messages["AHRS2"].altitude
+    
 
     try:
         if ids is not None:
-            if altitude > 7:
-                x_avg, y_avg = send_land_message(np.where(ids[0] == 50), corners)
-            else:
-                x_avg, y_avg = send_land_message(np.where(ids[0] == 70), corners)
-                              
+            #if altitude > 7:
+                #x_avg, y_avg = send_land_message(np.where(ids[0] == 50), corners)
+            #else:
+                #x_avg, y_avg = send_land_message(np.where(ids[0] == 70), corners)
+            x_avg, y_avg = send_land_message(0, corners)             
             log_and_print("X CENTER PIXEL: "+str(x_avg)+" Y CENTER PIXEL: "+str(y_avg))
             log_and_print("FOUND COUNT: "+str(found_count)+" NOTFOUND COUNT: "+str(notfound_count))
             found_count=found_count+1
